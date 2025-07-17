@@ -124,7 +124,7 @@ class esd_test():
 
         ax.set_xticklabels(ox)
         
-        fig.attrs={"metadata":{
+        ax.attrs={"metadata":{
             "caption": "Generalized ESD Test for Outliers for variable: "+str(self.var_name)+". Green and red bars indicate the status of the test stistic Ri.",
             "description": "The green (red) bars indicate the cases in which the unusual observations were not identified (identified)."
         }}
