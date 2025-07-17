@@ -6,9 +6,6 @@ from scipy.stats import t
 from matplotlib import pyplot as plt
 
 
-
-
-
 class outlier:
     
     def __init__(self, series):
@@ -118,6 +115,7 @@ class esd_test():
     def plot(self, **kwargs):
 
         df = copy.deepcopy(self.outliers)
+
 
         df['color'] = df.loc[:,'Outlier'].map({np.nan: 'blue', True:'red', False:'green'})
         ax = df.plot(kind='bar', y=self.var_name, legend= False, color = df.color)
