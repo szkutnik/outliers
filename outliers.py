@@ -4,6 +4,7 @@ import pandas as pd
 import scipy
 from scipy.stats import t
 from matplotlib import pyplot as plt
+import copy
 
 
 class outlier:
