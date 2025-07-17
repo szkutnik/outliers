@@ -116,7 +116,7 @@ class esd_test():
 
         table = self.outliers.query("not Outlier.isnull()")
 
-    return table
+        return table
         
         
     def plot(self, **kwargs):
@@ -138,7 +138,7 @@ class esd_test():
         
         plt.show()
 
-        return
+        return ax
     
     def describe(self,**kwargs):
         
