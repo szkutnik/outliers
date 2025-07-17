@@ -113,10 +113,10 @@ class esd_test():
         self.table = table(self)
 
     def table(self):
-
+        self.describe()
         table = self.outliers.query("not Outlier.isnull()")
 
-    return table
+        return table
         
         
     def plot(self, **kwargs):
@@ -127,7 +127,7 @@ class esd_test():
         df['color'] = df.loc[:,'Outlier'].map({np.nan: 'blue', True:'red', False:'green'})
         ax = df.plot(kind='bar', y=self.var_name, legend= False, color = df.color)
 
-        ox = [dt.strftime('%y-%m-%d') if dt.month ==12 else '' for dt in df.index]
+        ox = [dt.strftime('%Y-%m-%d') if dt.month ==12 else '' for dt in df.index]
 
         ax.set_xticklabels(ox)
         
@@ -138,7 +138,7 @@ class esd_test():
         
         plt.show()
 
-        return
+        return ax
     
     def describe(self,**kwargs):
         
