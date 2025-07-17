@@ -3,6 +3,7 @@ import numpy as np
 import pandas as pd
 import scipy
 from scipy.stats import t
+from matplotlib import pyplot as plt
 
 
 
@@ -24,6 +25,7 @@ class outlier:
         import pandas as pd
         import scipy
         from scipy.stats import t
+        from matplotlib import pyplot as plt
 
 
         ## Defining the cases: 
@@ -114,25 +116,23 @@ class esd_test():
         
     def plot(self, **kwargs):
 
-        outliers = self.outliers
+        df = copy.deepcopy(self.outliers)
 
-        fig = outliers.iloc[:,0].plot(**kwargs)
+        df['color'] = df.loc[:,'Outlier'].map({np.nan: 'blue', True:'red', False:'green'})
+        ax = df.plot(kind='bar', y=self.var_name, legend= False, color = df.color)
 
-        for i in outliers.iterrows():
+        ox = [dt.strftime('%y-%m-%d') if dt.month ==12 else '' for dt in df.index]
 
-            if i[1][3] is False:
-                fig.vlines(x=i[0], ymin = outliers.iloc[0,:].min(), ymax = i[1][0], color = "green",**kwargs)
-
-            if i[1][3] is True:
-                fig.vlines(x=i[0], ymin = outliers.iloc[0,:].min(), ymax = i[1][0], color = "red",**kwargs)
-                
+        ax.set_xticklabels(ox)
         
         fig.attrs={"metadata":{
-            "caption": "Generalized ESD Test for Outliers for variable: "+str(self.var_name)+". Green and red bars indicate ",
+            "caption": "Generalized ESD Test for Outliers for variable: "+str(self.var_name)+". Green and red bars indicate the status of the test stistic Ri.",
             "description": "The green (red) bars indicate the cases in which the unusual observations were not identified (identified)."
         }}
         
-        return fig
+        plt.show()
+
+        return
     
     def describe(self,**kwargs):
         
@@ -167,9 +167,9 @@ class esd_test():
 
         output.attrs={"metadata":{
             
-            "caption": "Generalized ESD Test for Outliers for variable:"+var_name+".",
+            "caption": f"Generalized ESD Test for Outliers for variable: {var_name}",
             "desription": "The generalized (extreme Studentized deviate) ESD test (Rosner 1983) is used to detect one or more outliers in a univariate data set that follows an approximately normal distribution.",
-            "outcome": outcome_comment0 + " " +outcome_comment1 ,            
+            "outcome": f"{outcome_comment0} {outcome_comment1}" ,            
             "outliers":{
                 "name":var_name,
                 "n_of_outliers":n_of_outliers,
