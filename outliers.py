@@ -110,7 +110,7 @@ class esd_test():
         self.k = k 
         self.alpha = alpha
         self.var_name = var_name
-        self.table = table(self)
+        self.table = self.table()
 
     def table(self):
         self.describe()
