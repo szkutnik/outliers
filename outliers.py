@@ -110,6 +110,13 @@ class esd_test():
         self.k = k 
         self.alpha = alpha
         self.var_name = var_name
+        self.table = table(self)
+
+    def table(self):
+
+        table = self.outliers.query("not Outlier.isnull()")
+
+    return table
         
         
     def plot(self, **kwargs):
