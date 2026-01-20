@@ -1,4 +1,4 @@
-from outlier_utils import detect_outliers, modified_z_scores
+from outliers import detect_outliers, modified_z_scores
 
 
 def test_modified_z_scores_empty():
